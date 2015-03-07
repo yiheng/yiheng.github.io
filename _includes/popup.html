@@ -1,0 +1,9 @@
+{% assign foo = include.images %}
+
+<div class="popup-gallery">
+{% for item in foo %}
+	<a href="/file/{{ item }}" title="">
+	  <img src="/file/thumb/{{ item }}" width="{{ include.imgWidth }}">
+  </a>
+{% endfor %}
+</div>

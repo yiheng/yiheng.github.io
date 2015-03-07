@@ -1,0 +1,281 @@
+/* Custom container */
+
+/* Replaced with normal container and standard footer */
+/*.container-narrow {
+  margin: 0 auto;
+  max-width: 700px; }
+
+.container-narrow > hr {
+  margin: 30px 0; }
+*/
+
+/* Replaced with standard BS3 Navbar */
+/*.navbar .nav {
+  float: right; }*/
+
+/* Jekyll Bootstrap Colors */
+h1, h2, h3, h4 {
+  color: #f22430;
+}
+#footer {
+  background-color: #fdcd60;
+}
+
+
+
+/* posts index */
+.post > h3.title {
+  position: relative;
+  padding-top: 10px; }
+
+.post > h3.title span.date {
+  position: absolute;
+  right: 0;
+  font-size: 0.9em; }
+
+.post > .more {
+  margin: 10px 0;
+  text-align: left; }
+
+/* post-full*/
+.post-full .date {
+  margin-bottom: 20px;
+  font-weight: bold; }
+
+/* tag_box */
+.tag_box {
+  list-style: none;
+  margin: 0;
+  overflow: hidden; }
+
+.tag_box li {
+  line-height: 28px; }
+
+.tag_box li i {
+  opacity: 0.9; }
+
+.tag_box.inline li {
+  float: left; }
+
+.tag_box a {
+  padding: 3px 6px;
+  margin: 2px;
+  background: #eee;
+  color: #555;
+  border-radius: 3px;
+  text-decoration: none;
+  border: 1px dashed #cccccc; }
+
+.tag_box a span {
+  vertical-align: super;
+  font-size: 0.8em; }
+
+.tag_box a:hover {
+  background-color: #e5e5e5; }
+
+.tag_box a.active {
+  background: #57A957;
+  border: 1px solid #4c964d;
+  color: #FFF; }
+
+
+
+/*  --- custom for mr-bs3 ----  */  
+
+html, body {
+height:auto;
+}  
+  
+  
+#wrap {
+  line-height: 1.5em;
+  margin: 0px auto 1em;
+  max-width: 46em;
+  min-height: 0;
+}
+
+
+#wrap > div.container {
+  box-shadow: 2px 2px 8px #aaa;
+	-webkit-box-shadow: 2px 2px 8px #aaa;
+	-moz-box-shadow: 2px 2px 8px #aaa;	
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 1em 3em 1.5em;
+  width: 100% !important;
+}  
+
+nav.navbar {
+    font-variant: small-caps;
+    line-height: 1em;
+    margin-bottom: 0;
+    margin-top: 0.5em;
+    position: relative;
+
+  background-image: none;
+  border-radius: 0px;
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+}
+
+
+.navbar-brand {
+    padding-bottom:0px;
+    padding-top:20px;    
+}
+
+.navbar-nav > li > a {
+    padding-bottom: 0px;
+    padding-top: 20px;
+}
+
+div.navbar-header {
+
+    vertical-align: bottom;
+}
+
+
+.navbar-default .navbar-nav > .active > a {
+  background-image: none;
+  box-shadow: none;
+  border-bottom: 1px solid;
+  background-color: transparent;
+
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: transparent;
+}
+
+
+
+.page-header {
+  margin: 0px;
+ border-bottom: none;
+
+}
+
+
+body {
+  background-color: #F5F5F5;
+  font-family: Palatino,georgia,"times new roman",serif;
+}
+
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: Palatino,georgia,"times new roman",serif;
+  font-variant: small-caps;
+  color: #000;
+
+}
+
+h1 {
+font-size: 25px;
+}
+
+h2 {
+font-size: 20px;
+}
+
+
+
+#footer {
+background-color: #F5F5F5;
+color: #808080;
+font-style: italic; 
+}
+
+
+#footer > div.container {
+  max-width: 46em;
+  text-align: center;
+}
+
+
+
+.right.inset {
+    margin-right: 0 !important;
+}
+.inset {
+    border: 1px solid #C0C0C0;
+    margin: 0 1em 0.8em;
+    padding: 2px;
+}
+.right {
+    clear: left;
+    float: right;
+}
+
+/* glyphicon spacing fix */
+.glyphicon:empty {
+  width: 1.5em;
+}
+
+/* custom coloring for glyphicon */
+.gray {
+  color: #999;
+}
+
+
+
+
+
+/* magnific popup */
+div.popup-gallery img {
+  border: 1px solid lightgray;
+}
+
+div.popup-gallery img:hover {
+  border: 1px solid gray;
+}
+
+/* override bootstrap */
+div.popup-gallery a:hover {
+  text-decoration: none !important;
+}
+
+
+/* my custom */
+
+
+#post-list h1 a {
+color: black;
+font-size: 125%;
+}
+
+ul.tag_box {
+  padding: 0px;
+  margin-bottom: .5em;
+}
+
+ul.tag_box > :first-child {
+  width: 20px;
+}
+
+ul.noglyph > :first-child {
+  width: initial !important;
+}
+
+
+#post-list h1 {
+clear:both;
+}
+
+
+div.logo-div {
+ float:left;
+ margin-right:1em;
+}
+
+div.logo-div > img {
+ width: 100px;
+}
+
+#post-list .entry-content {
+  overflow:hidden;
+}
+
+
+
+
