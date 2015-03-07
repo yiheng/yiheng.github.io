@@ -88,9 +88,15 @@ html {
 .sidebar-nav {
   margin-bottom: 1rem;
 }
+
+@media (min-width: 48em) {
+    .sidebar-nav-item {
+        display: block;
+        line-height: 1.75;
+    }
+}
 .sidebar-nav-item {
-  display: block;
-  line-height: 1.75;
+    margin: 0px 10px 0px 0px;
 }
 a.sidebar-nav-item:hover,
 a.sidebar-nav-item:focus {
