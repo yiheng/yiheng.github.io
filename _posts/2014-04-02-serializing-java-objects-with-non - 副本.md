@@ -445,4 +445,5 @@ final Person2 personOut = SerializationDemonstrator.deserialize("person2.dat", P
 
 ![placeholder](/public/images/serializedOutputDemoPerson2SerializedCityState.png "")
 
-通过使用定制的序列化方法，可以在不使用transient的情况下，对一个带有不可序列化属性的类进行序列化。当你要在一个需要序列化的类中使用不可序列化的类型，并且这些类型不能被修改时，这是一个有用的技术。\
+通过使用定制的序列化方法，可以在不使用transient的情况下，对一个带有不可序列化属性的类进行序列化。当你要在一个需要序列化的类中使用不可序列化的类型，并且这些类型不能被修改时，这是一个有用的技术。
+

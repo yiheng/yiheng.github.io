@@ -85,3 +85,4 @@ Java 8中大量的小函数，回调函数和错误报告有了更好的可读�
 3. **Netbean**在版本[7.4](https://netbeans.org/downloads/index.html)之后也开始支持java8了。
 
 如果你以前没有玩过java8，可以试一试。框架和工具已经有了。不要忘了Java8不仅会带给你健壮性，对于性能和安全性也是很有帮助。
+

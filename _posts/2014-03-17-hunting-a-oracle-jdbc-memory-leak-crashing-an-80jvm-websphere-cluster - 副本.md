@@ -42,3 +42,4 @@ JDBC驱动的供应商Oracle深入的研究了相关代码。他们发现这些�
 <div class="message">
 关于作者：Andreas Grabner有在Java和.Net领域十年以上的架构师和开发经历。现在他为Compuware担任技术策略师并且领导了Compuware应用性能管理中心的Excellence团队
 </div>
+
