@@ -9,15 +9,23 @@ abstract: 我从来没有想到我可以看到一个差劲的正则式造成一�
 
 我从来没有想到我可以看到一个差劲的正则式造成一台服务器没有响应。但它偏偏就在我们的一个服务器上面发生了，结果导致了它毫无响应。
 
-假设我们在解析一些外部汽车经销商的信息。我们想在各种各样的输入中找到那些带”no air conditioning”的汽车，同时不要匹配那些诸如”mono air conditioning”的模式。
+假设我们在解析一些外部汽车经销商的信息。我们想在各种各样的输入中找到那些带"no air conditioning"的汽车，同时不要匹配那些诸如"mono air conditioning"的模式。
 
 那个搞挂我们服务器的正则式类似于这样：
+
+{% highlight java %}
+Pattern pattern = Pattern.compile("^(?:.*?(?:\\s|,)+)*no\\s+air\\s+conditioning.*$");
+{% endhighlight %}
 
 两分钟后，这个测试还没有停止并且一个CPU核已经满负载运行了。
 
 ![placeholder](/public/images/regex-overload.png "")
 
 首先，我们是在整个输入数据上使用[matches](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Matcher.html#matches%28%29)方法的，所以不需要开始(^)和结束($)匹配符。其次，由于输入字符串中存在换行符，我们必须让正则式运行在[多行模式](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html#MULTILINE)下：
+
+{% highlight java %}
+Pattern pattern = Pattern.compile("(?:.*?(?:\\s|,)+)*no\\s+air\\s+conditioning.*?", Pattern.MULTILINE);
+{% endhighlight %}
 
 让我们看一看不同版本的正则式的行为：
 <table>
