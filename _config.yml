@@ -1,3 +1,5 @@
+excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
+
 # Dependencies
 markdown:         redcarpet
 highlighter:      pygments
@@ -10,17 +12,11 @@ relative_permalinks: true
 title:            少有人走的路
 tagline:          '又一个技术博客'
 description:      '享受学习和创造带来的乐趣'
-url:              http://hyde.getpoole.com
+url:              http://yiheng.github.io
 baseurl:          /
 
 author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
+  name:           'Ian Won'
+  url:            http://yiheng.github.io/
 
 paginate:         5
-
-# Custom vars
-version:          2.1.0
-
-github:
-  repo:           https://github.com/poole/hyde
