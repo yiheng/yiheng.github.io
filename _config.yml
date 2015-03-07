@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            少有人走的路
 tagline:          '又一个技术博客'
-description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+description:      '享受学习和创造带来的乐趣'
 url:              http://hyde.getpoole.com
 baseurl:          /
 
