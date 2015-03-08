@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: translate
 title: 寻找导致80JVM WebSphere集群崩溃的罪魁祸首——Oracle JDBC内存泄露
 abstract: 你是否在不断地过早重启你的JVM以防止它们内存耗尽？或者你已经收到了来自应用专家干巴巴的建议“增加Java堆空间”？ 本文介绍了一个由八个节点组成的集群（每个节点上运行了10个JVM，每个JVM的堆空间大小为4.1GB）的崩溃原因——Oracle JDBC内存泄露
 ---
