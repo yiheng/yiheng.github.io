@@ -30,7 +30,7 @@ Wordpress的插件，虽然带来了功能上扩展的便利，但是以增加�
 
 我们先从搭一个能跑的网站开始，[五步开始使用GitHub Pages](https://pages.github.com/)。
 
-现在已经有了一个网站了，但上面空空的什么也没有。下一步可以把[别人的模板](https://github.com/jekyll/jekyll/wiki/sites)clone下来，拷到我们这里来使用，如果允许的话，呵呵。这个博客使用的是[Poole](https://github.com/poole/poole)。把新的文件push到repository后，就可以看到我们网站有了基本的样子了。
+现在已经有了一个网站了，但上面空空的什么也没有。下一步可以把[别人的模板](https://github.com/jekyll/jekyll/wiki/sites)clone下来，拷到我们这里来使用，如果允许的话，呵呵。这个博客使用的是[Hyde](https://github.com/hyde/hyde)。把新的文件push到repository后，就可以看到我们网站有了基本的样子了。
 
 下一步我们要根据自己的需求定制网站。这里我们回顾一下Jekyll的工作原理，它会把我们的文章和网页模板连接在一起，然后编译（渲染）成html文件。
 
