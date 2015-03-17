@@ -63,11 +63,13 @@ HTTP头，DOM树，Cookie，localStorage等。
 header("Access-Control-Allow-Origin: http://www.a.com");
 {% endhighlight %}
 
-+ 脚本通过自己域的后端，把请求转发到另一个域。
++ 通过后端转发
 
-+ 修改document.domain。这里只允许往上升，例如a.git.com到git.com，这样脚本就可以访问git.com上的资源了。还有种用法是假设浏览器访问了a.git.com和b.git.com，如果它们的脚本都把域名设为git.com，那么浏览器本地的资源可以共享。
++ 浏览器脚本修改document.domain。域名只允许往上升，例如a.git.com到git.com，这样脚本就可以访问git.com上的资源了。还有种用法是假设浏览器访问了a.git.com和b.git.com，如果它们的脚本都把域名设为git.com，那么浏览器本地的资源可以共享。
 
-#### 奇淫技巧
++ window.postMessage。Html5的新方法，两个域下的脚本可以跨window通信。
+
+#### 有点绕的方式
 
 + JSONP
 
@@ -81,11 +83,13 @@ function displayData(data) {
 
 之后正常的做法是交给一个Ajax请求去做，但如果目标URL在不同的域内，就废了。
 
-其实还有种方法达到Ajax这种异步请求并执行的效果<script src=""></script>标签。当浏览器发现这种script标签的时候，就会发起一个web请求，把返回的数据当做JavaScript执行一遍。
+{% raw %}
+其实还有种方法达到Ajax这种异步请求并执行的效果，那就是<script src="some_url"></script>标签。当浏览器发现<script>标签的时候，就会发起一个web请求，把返回的数据当做JavaScript执行一遍。
 
 浏览器只是禁止脚本跨域访问，并没有禁止html文件加载其他域下面的资源，例如图片，例如script本身。
 
 当你想请求另一个域下面的资源时，当前脚本只需要动态生成一个<script>元素并加到DOM树下面，浏览器就会乖乖把<script>中URL中的内容load下来，然后执行一把。如果远程服务器配合返回一个这样的东东
+{% endraw %}
 
 {% highlight javascript %}
 displayData({"name", "yiheng"})
@@ -93,13 +97,11 @@ displayData({"name", "yiheng"})
 
 我们的回调函数在数据load完并执行的过程中就会被调用，是不是很像一次Ajax请求。
 
-这就是JasonP，够绕吧。当然这种方式也需要服务器端的配合，也就相当于授权。其实还是没有违反同源策略。
+这就是JasonP。当然这种方式也需要服务器端的配合，也就相当于授权。其实还是没有违反同源策略。
 
 + 利用Flash发起请求。这时需要在服务器端部署crossdomain.xml文件，也相当于服务器端授权。还有种做法是，另一个域下的一个页面可以再开一个SWF，然后用Flash的一些机制做通信。
 
-+ 利用iframe。
-
-+ window.postMessage
++ 利用iframe。基本原理是父窗口可以修改iframe的URL，而iframe可以是另一个域过来的内容。这样父窗口和iframe里面的脚本就可以利用URL（主要是锚点#之后的部分）或者是window.name属性（该属性在URL变化时不变，这样iframe里的脚本先把信息存到该属性上，父窗口在把iframe的URL改回到自己的域后可以读出该值）进行通信。同样是要有服务器端的配合。
 
 ### 跨域攻击
 
