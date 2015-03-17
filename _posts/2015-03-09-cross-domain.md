@@ -83,13 +83,11 @@ function displayData(data) {
 
 之后正常的做法是交给一个Ajax请求去做，但如果目标URL在不同的域内，就废了。
 
-{% raw %}
-其实还有种方法达到Ajax这种异步请求并执行的效果，那就是<script src="some_url"></script>标签。当浏览器发现<script>标签的时候，就会发起一个web请求，把返回的数据当做JavaScript执行一遍。
+其实还有种方法达到Ajax这种异步请求并执行的效果，那就是&lt;script src="some_url"&gt;&lt;/script&gt;标签。当浏览器发现&lt;script&gt;标签的时候，就会发起一个web请求，把返回的数据当做JavaScript执行一遍。
 
 浏览器只是禁止脚本跨域访问，并没有禁止html文件加载其他域下面的资源，例如图片，例如script本身。
 
-当你想请求另一个域下面的资源时，当前脚本只需要动态生成一个<script>元素并加到DOM树下面，浏览器就会乖乖把<script>中URL中的内容load下来，然后执行一把。如果远程服务器配合返回一个这样的东东
-{% endraw %}
+当你想请求另一个域下面的资源时，当前脚本只需要动态生成一个&lt;script&gt元素并加到DOM树下面，浏览器就会乖乖把&lt;script&gt;中URL中的内容load下来，然后执行一把。如果远程服务器配合返回一个这样的东东
 
 {% highlight javascript %}
 displayData({"name", "yiheng"})
