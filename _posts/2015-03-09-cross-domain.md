@@ -71,6 +71,8 @@ header("Access-Control-Allow-Origin: http://www.a.com");
 
 #### 有点绕的方式
 
++ 利用表单。浏览器里不禁止表单跨域，所以可以用Javascript + iframe + 表单实现跨域调用。而且这种方式不需要远程服务器端明确授权的。感觉这种方式确实违反了浏览器的同源策略原则。所以对于敏感的API调用，在服务器端不能仅仅检查header里的token。
+
 + JSONP
 
 如果我们想访问一个URL并处理从它那边传回来的数据，JavaScript下面一般是写一个callback。例如：
@@ -102,6 +104,7 @@ displayData({"name", "yiheng"})
 + 利用iframe。基本原理是父窗口可以修改iframe的URL，而iframe可以是另一个域过来的内容。这样父窗口和iframe里面的脚本就可以利用URL（主要是锚点#之后的部分）或者是window.name属性（该属性在URL变化时不变，这样iframe里的脚本先把信息存到该属性上，父窗口在把iframe的URL改回到自己的域后可以读出该值）进行通信。同样是要有服务器端的配合。
 
 ### 跨域攻击
+
 
 
 未完待续
