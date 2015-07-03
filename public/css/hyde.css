@@ -67,7 +67,7 @@ html {
     left: 0;
     bottom: 0;
     width: 18rem;
-    text-align: left;
+    text-align: center;
   }
 }
 
@@ -96,7 +96,7 @@ html {
     }
 }
 .sidebar-nav-item {
-    margin: 0px 10px 0px 0px;
+    margin: 20px 10px 20px 10px;
 }
 a.sidebar-nav-item:hover,
 a.sidebar-nav-item:focus {
@@ -269,4 +269,41 @@ a.sidebar-nav-item:focus {
   color: #333;
   font-size: 20px;
   border-left: 10px solid #CFC;
+}
+
+.contact {
+    margin-bottom: 10px;
+}
+
+.contact-item {
+    margin: 10px;
+}
+
+.achive-list {
+    margin: 20px 0px 0px 0px
+}
+
+.tags-list {
+    margin-top: 20px;
+}
+
+.post-tag {
+    margin-top: 10px;
+}
+
+.tag-link {
+    background-color: #DDD;
+    margin: 2px 2px;
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+.home-post {
+    margin-bottom: 10px;
+}
+
+@media (min-width: 48em) {
+    .site-title {
+        margin-bottom: 40px;
+    }
 }

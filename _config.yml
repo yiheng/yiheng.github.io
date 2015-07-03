@@ -9,15 +9,15 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            少有人走的路
-tagline:          '又一个技术博客'
-description:      '享受探索和创造带来的乐趣'
-aboutme:          '我是以恒，生活在魔都的一枚码农。平时喜欢阅读、瞎折腾、还有写点东西。'
+title:            Coffee Programmer
+tagline:          ''
+description:      '多实践，多思考。思考的最好方式是写作。'
+name:             '以恒'
 url:              http://yiheng.github.io
 baseurl:          /
 
 author:
-  name:           'Ian Won'
+  name:           'Ian Wong'
   url:            http://yiheng.github.io/
 
 paginate:         5

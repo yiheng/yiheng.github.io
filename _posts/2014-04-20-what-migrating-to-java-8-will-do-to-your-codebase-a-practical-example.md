@@ -2,6 +2,7 @@
 layout: translate
 title: Java 8会给你的代码带来什么——一个实际的例子
 abstract: 无论你知道与否，Java 8就要来了。这个让人期盼已久的版本已经确定在三月18号发布，离现在只有一个月了。实际上，你已经可以下载和尝试候选版。（译者注：在翻译这篇文章的时候，Java8已经发布了；但这仍是一篇值得一读的介绍Java 8的文章。）
+tags: [java]
 ---
 <div class="message">
 本文在<a href="http://www.importnew.com/">ImportNew</a>上发表，原文来自<a href="http://zeroturnaround.com/rebellabs/what-migrating-to-java-8-will-do-to-your-codebase-a-practical-example/">zeroturnaround</a>。转载请保留原文出处、译者和译文链接。

@@ -2,6 +2,7 @@
 layout: translate
 title: 怎样对带有不可序列化属性的Java对象进行序列化
 abstract: 出于很多原因我们想使用自定义的序列化方法取代Java默认的机制。一个最常见的原因是提高性能，而另一个原因是有时候我们无法使用默认的序列化方法。在这篇文章中，我们具体来讨论怎样通过定制的序列化方法，对一个较大的、带有不可序列化属性的对象进行序列化。
+tags: [java, serialization]
 ---
 <div class="message">
 本文在<a href="http://www.importnew.com/10705.html">ImportNew</a>上发表，原文来自<a href="http://marxsoftware.blogspot.com/2014/02/serializing-java-objects-with-non.html">marxsoftware</a>。转载请保留原文出处、译者和译文链接。

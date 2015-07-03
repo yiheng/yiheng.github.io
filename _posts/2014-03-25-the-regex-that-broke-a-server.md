@@ -2,6 +2,7 @@
 layout: translate
 title: 一个正则式引发的血案
 abstract: 我从来没有想到我可以看到一个差劲的正则式造成一台服务器没有响应。但它偏偏就在我们的一个服务器上面发生了，结果导致了它毫无响应。
+tags: [java, regex]
 ---
 <div class="message">
 本文在<a href="http://www.importnew.com/10308.html">ImportNew</a>上发表，原文来自<a href="http://vladmihalcea.com/2014/02/24/the-regex-that-broke-a-server/">vladmihalcea</a>。转载请保留原文出处、译者和译文链接。
