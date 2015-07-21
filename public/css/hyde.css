@@ -302,8 +302,11 @@ a.sidebar-nav-item:focus {
     margin-bottom: 10px;
 }
 
-@media (min-width: 48em) {
-    .site-title {
-        margin-bottom: 40px;
-    }
+.site-title {
+    display: inline-block;
 }
+
+.site-title img {
+    border-radius:50%;
+}
+
