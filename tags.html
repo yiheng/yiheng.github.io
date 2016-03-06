@@ -6,9 +6,9 @@ title: 标签分类
 <div class="tags">
     {% for tag in site.tags %}
       {% if forloop.last %}
-      <a href="#{{ tag[0] }}" onclick=display('#{{ tag[0] }}' style="font-size: {{ tag[1] | size | times: 1.0 | plus: 19 }}px;">)>{{ tag[0] }}({{ tag[1] | size }})</a>,
+      <a href="#{{ tag[0] }}" onclick=display('#{{ tag[0] }}' style="font-size: {{ tag[1] | size | times: 1.0 | plus: 19 }}px;">{{ tag[0] }}({{ tag[1] | size }})</a>
       {% else %}
-      <a href="#{{ tag[0] }}" onclick=display('#{{ tag[0] }}' style="font-size: {{ tag[1] | size | times: 1.0 | plus: 19 }}px;">)>{{ tag[0] }}({{ tag[1] | size }})</a>
+      <a href="#{{ tag[0] }}" onclick=display('#{{ tag[0] }}' style="font-size: {{ tag[1] | size | times: 1.0 | plus: 19 }}px;">{{ tag[0] }}({{ tag[1] | size }})</a>,
       {% endif %}
     {% endfor %}
 </div>
