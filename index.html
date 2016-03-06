@@ -17,8 +17,13 @@ title: Home
       <div class="home-post">{{ post.abstract }}</div>
       <p class="readmore"><a href="{{ post.url }}">阅读全文</a></p>
       
-      <i class="fa fa-tags"></i>{% for tag in post.tags %}
-      <a class="tag-link" href="{{ site.base_url }}/tags/#{{ tag }}">{{ tag }}</a>
+      <i class="fa fa-tags"></i>
+      {% for tag in post.tags %}
+      {% if forloop.last %}
+      <a href="{{ site.base_url }}/tags/#{{ tag }}">{{ tag }}</a>
+      {% else %}
+      <a href="{{ site.base_url }}/tags/#{{ tag }}">{{ tag }}</a>,
+      {% endif %}
       {% endfor %}
     </div>
   {% endfor %}
