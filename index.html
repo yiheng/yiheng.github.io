@@ -14,8 +14,7 @@ title: Home
 
       <span class="post-date">{{ post.date | date_to_string }}</span>
 
-      <div class="home-post">{{ post.abstract }}</div>
-      <p class="readmore"><a href="{{ post.url }}">阅读全文 >></a></p>
+      <div class="home-post">{{ post.abstract }} <a href="{{ post.url }}">阅读全文 >></a></div>
       
       <i class="fa fa-tags"></i>
       {% for tag in post.tags %}
