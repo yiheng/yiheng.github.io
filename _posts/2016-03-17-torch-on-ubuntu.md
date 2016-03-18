@@ -96,10 +96,8 @@ tags: [machine-learning,torch,deep-learning,gpu,neural-network]
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>mkdir train && mv ILSVRC2012_img_train.tar train/ && cd train</code>
 <code>tar -xvf ILSVRC2012_img_train.tar && rm -f ILSVRC2012_img_train.tar</code>
-<code>find . -name "*.tar" | while read NAME ; do mkdir -p "${NAME%.tar}"; tar -xvf "${NAME}" -C "${NAME%.tar}"; rm -f "${NAME}"; done
-</code>
-<code>cd ../ && mkdir val && mv ILSVRC2012_img_val.tar val/ && cd val && tar -xvf ILSVRC2012_img_val.tar
-</code>
+<code>find . -name "*.tar" | while read NAME ; do mkdir -p "${NAME%.tar}"; tar -xvf "${NAME}" -C "${NAME%.tar}"; rm -f "${NAME}"; done</code>
+<code>cd ../ && mkdir val && mv ILSVRC2012_img_val.tar val/ && cd val && tar -xvf ILSVRC2012_img_val.tar</code>
 <code>wget -qO- https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh | bash
 </code>
 </pre>
