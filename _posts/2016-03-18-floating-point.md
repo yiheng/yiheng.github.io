@@ -15,14 +15,17 @@ tags: [data-structure]
 
 很多场景对于精度要求也没那么高，例如分布式深度学习里面，如果用半精度的话，比起单精度来可以节省一半传输成本。考虑到深度学习的模型可能会有几亿个参数，使用半精度传输还是非常有价值的。
 
-Google的TensorFlow就是使用了16位的浮点数，不过他们用的不是英伟达提出的那个标准，而是直接把32位的浮点数小数部分截了。据说是为了更less computation expensive。。。
+Google的TensorFlow就是使用了16位的浮点数，不过他们用的不是英伟达提出的那个标准，而是直接把32位的浮点数小数部分截了。据说是为了less computation expensive。。。
 
 比较下几种浮点数的layout:
 
+双精度浮点数
 ![placeholder](/public/images/floating-point-1.png "双精度浮点")
 
+单精度浮点数
 ![placeholder](/public/images/floating-point-2.png "单精度浮点")
 
+半精度浮点数
 ![placeholder](/public/images/floating-point-3.png "半精度浮点")
 
 它们都分成3部分，符号位，指数和尾数。不同精度只不过是指数位和尾数位的长度不一样。
@@ -30,7 +33,7 @@ Google的TensorFlow就是使用了16位的浮点数，不过他们用的不是�
 解析一个浮点数就5条规则
 
 1. 如果指数位全零，尾数位是全零，那就表示0
-2 如果指数位全零，尾数位是非零，就表示一个很小的数（subnormal），计算方式(−1)signbit×2−126× 0.significandbits
+2. 如果指数位全零，尾数位是非零，就表示一个很小的数（subnormal），计算方式(−1)signbit×2−126× 0.significandbits
 3. 如果指数位全是1，尾数位是全零，表示正负无穷
 4. 如果指数位全是1，尾数位是非零，表示不是一个数NAN
 5. 剩下的计算方式为(−1)signbit×2exponentbits−127× 1.significandbits
