@@ -33,10 +33,10 @@ Google的TensorFlow就是使用了16位的浮点数，不过他们用的不是�
 解析一个浮点数就5条规则
 
 1. 如果指数位全零，尾数位是全零，那就表示0
-2. 如果指数位全零，尾数位是非零，就表示一个很小的数（subnormal），计算方式(−1)signbit×2−126× 0.significandbits
+2. 如果指数位全零，尾数位是非零，就表示一个很小的数（subnormal），计算方式 (−1)^signbit × 2^−126 × 0.fractionbits
 3. 如果指数位全是1，尾数位是全零，表示正负无穷
 4. 如果指数位全是1，尾数位是非零，表示不是一个数NAN
-5. 剩下的计算方式为(−1)signbit×2exponentbits−127× 1.significandbits
+5. 剩下的计算方式为 (−1)^signbit × 2^(exponentbits−127) × 1.fractionbits
 
 常用的语言几乎都不提供半精度的浮点数，这时候需要我们自己转化。
 
@@ -44,9 +44,10 @@ Google的TensorFlow就是使用了16位的浮点数，不过他们用的不是�
 
 <https://github.com/numpy/numpy/blob/master/numpy/core/src/npymath/halffloat.c#L466>
 
-当然按照TensorFlow那么玩的话就很简单了。
+当然按照TensorFlow那么玩的话就很简单了(~摊手~)。
 
 参考资料：
+
 <https://en.wikipedia.org/wiki/Half-precision_floating-point_format>
 
 <https://en.wikipedia.org/wiki/Double-precision_floating-point_format>
