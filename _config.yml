@@ -2,7 +2,7 @@ excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll
 
 # Dependencies
 markdown:         redcarpet
-highlighter:      pygments
+highlighter:      rouge
 
 # Permalinks
 permalink:        pretty
