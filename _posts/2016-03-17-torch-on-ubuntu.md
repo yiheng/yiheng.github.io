@@ -24,15 +24,15 @@ tags: [machine-learning,torch,deep-learning,gpu,neural-network]
 <code>Acquire::http::Proxy "http://yourproxyaddress:proxyport";</code>
 </pre>
 
-然后装cuda，到[这里](https://developer.nvidia.com/cuda-downloads)上，选择linux然后x86_64然后Ubuntu然后14.04然后runfile（我就是不用deb你咬我啊），然后把URL拷到终端，用wget + URL下载runfile。然后
+然后装cuda，到[这里](https://developer.nvidia.com/cuda-downloads)上，选择linux然后x86\_64然后Ubuntu然后14.04然后runfile（我就是不用deb你咬我啊），然后把URL拷到终端，用wget + URL下载runfile。然后
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
-<code>sudo + ./runfile</code>
+<code>sudo./runfile</code>
 </pre>
 
-这里如果要代理的话，需要把http_proxy和https_proxy设上代理地址。
+这里如果要代理的话，需要把http\_proxy和https\_proxy设上代理地址。
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
-<code>export http_proxy=http://yourproxyaddress:proxyport</code>
-<code>export https_proxy=http://yourproxyaddress:proxyport</code>
+<code>export http\_proxy=http://yourproxyaddress:proxyport</code>
+<code>export https\_proxy=http://yourproxyaddress:proxyport</code>
 </pre>
 
 使用sudo时自动使用代理
@@ -41,8 +41,8 @@ tags: [machine-learning,torch,deep-learning,gpu,neural-network]
 </pre>
 然后加上
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
-<code>Defaults  env_keep += "http_proxy"</code>
-<code>Defaults  env_keep += "https_proxy"</code>
+<code>Defaults  env\_keep += "http\_proxy"</code>
+<code>Defaults  env\_keep += "https\_proxy"</code>
 </pre>
 
 装好了之后，脚本会好心提示把/usr/local/cuda的bin路径加到你的PATH里，还有把/usr/local/cuda的lib路径加到你的ld.so.conf.d下面（新建一个conf文件）。之后不要忘了跑下
@@ -94,10 +94,10 @@ tags: [machine-learning,torch,deep-learning,gpu,neural-network]
 
 到[这里](http://image-net.org/download-images)下载2012年的imagenet数据集（train和validation）。下载好之后，在下载的文件夹下面执行
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
-<code>mkdir train && mv ILSVRC2012_img_train.tar train/ && cd train</code>
-<code>tar -xvf ILSVRC2012_img_train.tar && rm -f ILSVRC2012_img_train.tar</code>
+<code>mkdir train && mv ILSVRC2012\_img\_train.tar train/ && cd train</code>
+<code>tar -xvf ILSVRC2012\_img\_train.tar && rm -f ILSVRC2012\_img\_train.tar</code>
 <code>find . -name "*.tar" | while read NAME ; do mkdir -p "${NAME%.tar}"; tar -xvf "${NAME}" -C "${NAME%.tar}"; rm -f "${NAME}"; done</code>
-<code>cd ../ && mkdir val && mv ILSVRC2012_img_val.tar val/ && cd val && tar -xvf ILSVRC2012_img_val.tar</code>
+<code>cd ../ && mkdir val && mv ILSVRC2012\_img\_val.tar val/ && cd val && tar -xvf ILSVRC2012\_img\_val.tar</code>
 <code>wget -qO- https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh | bash
 </code>
 </pre>
@@ -106,7 +106,7 @@ tags: [machine-learning,torch,deep-learning,gpu,neural-network]
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>git clone https://github.com/soumith/imagenet-multiGPU.torch.git</code>
 <code>cd imagenet-multiGPU.torch</code>
-<code>th main.lua -data path_to_imagenet_folder</code>
+<code>th main.lua -data path\_to\_imagenet\_folder</code>
 </pre>
 
 就可以开始跑了.
