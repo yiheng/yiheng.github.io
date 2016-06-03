@@ -78,4 +78,154 @@ JNIEXPORT void JNICALL Java_Greeting_greeting(JNIEnv * jenv, jclass jcls) {
 <code>Goodbye World!</code>
 </pre>
 
+###在Maven中构建
+基本思路是，我们创建一个Maven项目Greeting，这个项目包含两个子项目native和jni，其中native生成so文件，jni生成class文件以及打成jar包。
+
+创建文件夹
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mkdir Greeting</code>
+</pre>
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mkdir -p Greeting/native/src/main/c/jni</code>
+</pre>
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mv Greeting.c Greeting/native/src/main/c/jni</code>
+</pre>
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mkdir -p Greeting/jni/src/main/java</code>
+</pre>
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mv Greeting.java Greeting/jni/src/main/java</code>
+</pre>
+
+创建Greeting项目的pom.xml文件
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.yiheng</groupId>
+    <artifactId>greeting</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>native</module>
+        <module>jni</module>
+    </modules>
+</project>
+{% endhighlight %}
+
+创建native项目的pom.xml文件
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://maven.apache.org/POM/4.0.0"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+
+ <parent>
+     <groupId>io.github.yiheng</groupId>
+     <artifactId>greeting</artifactId>
+     <version>0.0.1-SNAPSHOT</version>
+ </parent>
+ <artifactId>greeting_native</artifactId>
+ <packaging>so</packaging>
+
+ <build>
+     <plugins>
+         <plugin>
+             <artifactId>maven-compiler-plugin</artifactId>
+         </plugin>
+         <plugin>
+             <groupId>org.codehaus.mojo</groupId>
+             <artifactId>native-maven-plugin</artifactId>
+             <version>1.0-alpha-8</version>
+             <extensions>true</extensions>
+             <configuration>
+                 <compilerProvider>generic-classic</compilerProvider>
+                 <compilerExecutable>gcc</compilerExecutable>
+                 <linkerExecutable>gcc</linkerExecutable>
+                 <sources>
+                     <source>
+                         <directory>${basedir}/src/main/c/jni</directory>
+                         <fileNames>
+                             <fileName>Greeting.c</fileName>
+                         </fileNames>
+                     </source>
+                 </sources>
+                 <compilerStartOptions>
+                     <compilerStartOption>-I ${JAVA_HOME}/include/</compilerStartOption>
+                     <compilerStartOption>-I ${JAVA_HOME}/include/linux/</compilerStartOption>
+                 </compilerStartOptions>
+                 <compilerEndOptions>
+                     <compilerEndOption>-shared</compilerEndOption>
+                     <compilerEndOption>-fPIC</compilerEndOption>
+                 </compilerEndOptions>
+                 <linkerStartOptions>
+                     <linkerStartOption>-I ${JAVA_HOME}/include/</linkerStartOption>
+                     <linkerStartOption>-I ${JAVA_HOME}/include/linux/</linkerStartOption>
+                 </linkerStartOptions>
+                 <linkerEndOptions>
+                     <linkerEndOption>-shared</linkerEndOption>
+                     <linkerEndOption>-fPIC</linkerEndOption>
+                 </linkerEndOptions>
+                 <linkerFinalName>libgreeting</linkerFinalName>
+             </configuration>
+         </plugin>
+     </plugins>
+ </build>
+</project>
+{% endhighlight %}
+
+这里我们使用了一个叫做native-maven-plugin的插件编译我们的native代码，本质上相当于执行了一条gcc命令。
+
+然后是jni项目的pom.xml
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.yiheng</groupId>
+        <artifactId>greeting</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>greeting_jni</artifactId>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+{% endhighlight %}
+
+在Greeting目录下面，执行
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mvn compile</code>
+</pre>
+
+我们可以看到在编译成功，并在native/target下生成了so文件，在jni/target/classes下生成了class文件。
+
+把它们拷到一起
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>cp jni/target/classes/Greeting.class ./</code>
+</pre>
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>cp native/target/libgreeting.so ./</code>
+</pre>
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>java Greeting</code>
+</pre>
+
+打印出Goodby World！消息。
+
 未完待续。。。
