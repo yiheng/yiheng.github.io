@@ -216,4 +216,162 @@ JNIEXPORT void JNICALL Java_Greeting_greeting(JNIEnv * jenv, jclass jcls) {
 
 打印出Goodby World！消息。
 
-未完待续。。。
+###添加测试
+在开发中我们都会添加回归测试用例。我们可以先往greeting_jni项目中添加一个unit test。
+
+创建目录，在Greeting目录下
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mkdir -p jni/src/test/java</code>
+</pre>
+
+测试代码，GreetingTest.java:
+{% highlight java %}
+import org.junit.Test;
+
+public class GreetingTest {
+    @Test
+    public void testGreeting() {
+        Greeting.greeting();
+    }
+}
+{% endhighlight %}
+
+修改jni文件夹里的pom.xml文件，添加junit依赖
+{% highlight xml %}
+     <dependencies>
+         <dependency>
+             <groupId>junit</groupId>
+             <artifactId>junit</artifactId>
+             <version>4.11</version>
+         </dependency>
+     </dependencies>
+{% endhighlight %}
+
+在Greeting目录下，运行测试命令
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mvn test</code>
+</pre>
+
+我们可以看到抛了一个错
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>Tests in error: </code>
+<code>  testGreeting(GreetingTest): no greeting in java.library.path</code>
+</pre>
+
+这个意思就是在给定路径下找不到libgreeting.so文件。JVM在load动态库文件时，会从制定的几个位置去找，例如当前路径，以及在/etc/ld.conf.so和/
+etc/ld.conf.so.d中定义的路径。
+
+这里我们使用jniloader来load我们的so文件，使用它的另一个好处是它可以从打包好的jar包中load动态库。这样我们可以把so文件打包进jar文件，方便使用。
+
+只要在jni项目的pom.xml中build部分添加
+{% highlight xml %}
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-surefire-plugin</artifactId>
+                 <version>2.7</version>
+                 <configuration>
+                     <systemPropertyVariables>
+                         <java.library.path>${project.build.directory}/classes</java.library.path>
+                     </systemPropertyVariables>
+                 </configuration>
+             </plugin>
+
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-dependency-plugin</artifactId>
+                 <version>2.10</version>
+                 <executions>
+                     <execution>
+                         <id>copy</id>
+                         <phase>compile</phase>
+                         <goals>
+                             <goal>copy</goal>
+                         </goals>
+                         <configuration>
+                             <artifactItems>
+                                 <artifactItem>
+                                     <groupId>io.github.yiheng</groupId>
+                                     <artifactId>greeting_native</artifactId>
+                                     <version>0.0.1-SNAPSHOT</version>
+                                     <type>so</type>
+                                     <overWrite>false</overWrite>
+                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                                     <destFileName>libgreeting.so</destFileName>
+                                 </artifactItem>
+                             </artifactItems>
+                         </configuration>
+                     </execution>
+                 </executions>
+             </plugin>
+{% endhighlight %}
+
+第一个plugin是设置路径，第二个plugin是编译时拷so文件。为了让jni编译时能找到so文件，我们需要把native pom.xml中
+{% highlight xml %}
+                 <linkerFinalName>libgreeting</linkerFinalName>
+{% endhighlight %}
+
+这一行删掉。在拷贝的时候我们改变了文件名。
+
+把so文件拷到target/classes的一个好处是，打包时也会把so文件包含到jar包里，这样就方便部署你的代码了。
+
+在jni项目pom.xml的dependencies部分添加
+{% highlight xml %}
+         <dependency>
+             <groupId>com.github.fommil</groupId>
+             <artifactId>jniloader</artifactId>
+             <version>1.1</version>
+         </dependency>
+{% endhighlight %}
+
+我们使用jniloader来load我们的so文件。
+{% highlight java %}
+     static {
+         com.github.fommil.jni.JniLoader.load("libgreeting.so");
+     }
+{% endhighlight %}
+
+在test时，jniloader检查java.library.path里的路径有没有指定的so文件。由于我们前面在plugin里设置了路径target/classes，并把so文件拷了过去，
+我们编译生成的so文件在test会被load起来。
+
+重新编译加测试
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mvn clean test</code>
+</pre>
+
+我们看到输出中显示so文件被加载，并且看到消息被打印出来了。
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>INFO: successfully loaded /home/ian/demo/Greeting/jni/target/classes/libgreeting.so</code>
+<code>Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.04 sec</code>
+<code></code>
+<code>Results :</code>
+<code></code>
+<code>Tests run: 1, Failures: 0, Errors: 0, Skipped: 0</code>
+<code></code>
+<code>Goodbye World!</code>
+</pre>
+
+###打包
+我们在Greeting路径下执行打包命令。
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>mvn package</code>
+</pre>
+
+我们用jar命令看一下包里有什么东西。
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>jar tf jni/target/greeting_jni-0.0.1-SNAPSHOT.jar</code>
+</pre>
+
+可以看到可爱的so文件和class文件
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>META-INF/</code>
+<code>META-INF/MANIFEST.MF</code>
+<code>Greeting.class</code>
+<code>libgreeting.so</code>
+<code>META-INF/maven/</code>
+<code></code>
+</pre>
+
+前面说过jniloader可以从jar包里load so文件，我们直接执行jar文件
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>java -cp jni/target/greeting_jni-0.0.1-SNAPSHOT.jar Greeting</code>
+</pre>
