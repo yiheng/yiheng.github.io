@@ -1,8 +1,7 @@
 ---
 layout: post
 title: 使用Maven构建发布JNI项目
-abstract: Maven是Java项目构建利器。当Java中项目包含Native代码的时候，Maven仍然能够优雅的支持。这篇文章总结了如何使用Maven构建一个JNI的
-Java项目。
+abstract: Maven是Java项目构建利器。当Java中项目包含Native代码的时候，Maven仍然能够优雅的支持。这篇文章总结了如何使用Maven构建一个JNI的Java项目。
 tags: [java, maven]
 draft: 1
 ---
