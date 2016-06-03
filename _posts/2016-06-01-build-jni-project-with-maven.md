@@ -14,7 +14,7 @@ Maven是Java世界必备的开发工具。它完美的解决了Java项目定义�
 幸运的是，我们在Maven的框架下仍然能够优雅的解决这个问题。这篇文章就总结了如何使用Maven构建、测试和发布一个最简单的JNI项目。这里我们设定开发
 环境Linux。
 
-1. 一个简单的JNI项目
+###一个简单的JNI项目
 在这个项目，我们通过JNI调用一段native代码打印“Goodbye World!”
 
 ####Greeting.java:
@@ -50,7 +50,7 @@ class Greeting {
 这就生成了我们应该实现的C文件的接口。
 
 ####C代码 Greeting.c:
-{% highlight java %}
+{% highlight c %}
 #include <jni.h>
 #include <stdio.h>
 
