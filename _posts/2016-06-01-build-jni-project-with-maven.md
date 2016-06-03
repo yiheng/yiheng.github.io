@@ -351,27 +351,49 @@ etc/ld.conf.so.d中定义的路径。
 </pre>
 
 ###打包
-我们在Greeting路径下执行打包命令。
+在打包时，不仅要打包我们的文件，还要把jniloader类都打包进来。我们可以使用maven-assembly-plugin插件。
+
+在jni路径下的pom.xml文件的build部分，添加
+{% highlight xml %}
+             <plugin>
+                 <artifactId>maven-assembly-plugin</artifactId>
+                 <configuration>
+                     <descriptorRefs>
+                         <descriptorRef>jar-with-dependencies</descriptorRef>
+                     </descriptorRefs>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>single</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+{% endhighlight %}
+
+然后我们在Greeting路径下执行打包命令。
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>mvn package</code>
 </pre>
 
-我们用jar命令看一下包里有什么东西。
+用jar命令看一下生成的jar包里有什么东西。
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
-<code>jar tf jni/target/greeting_jni-0.0.1-SNAPSHOT.jar</code>
+<code>jar tf jni/target/greeting_jni-0.0.1-SNAPSHOT-jar-with-dependencies.jar</code>
 </pre>
 
-可以看到可爱的so文件和class文件
-<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
-<code>META-INF/</code>
-<code>META-INF/MANIFEST.MF</code>
-<code>Greeting.class</code>
-<code>libgreeting.so</code>
-<code>META-INF/maven/</code>
-<code></code>
-</pre>
+可以看到可爱的libgreeting.so文件和Greeting.class文件。
 
 前面说过jniloader可以从jar包里load so文件，我们直接执行jar文件
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
-<code>java -cp jni/target/greeting_jni-0.0.1-SNAPSHOT.jar Greeting</code>
+<code>java -cp jni/target/greeting_jni-0.0.1-SNAPSHOT-jar-with-dependencies.jar Greeting</code>
 </pre>
+
+我们看到输出
+<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
+<code>INFO: successfully loaded /tmp/jniloader904592266431635427libgreeting.so</code>
+<code>Goodbye World!</code>
+</pre>
+
+上面的代码可以从<a href="/public/resource/greeting.tar.gz">这里</a>下载。Have fun！
