@@ -84,17 +84,9 @@ JNIEXPORT void JNICALL Java_Greeting_greeting(JNIEnv * jenv, jclass jcls) {
 创建文件夹
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>mkdir Greeting</code>
-</pre>
-<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>mkdir -p Greeting/native/src/main/c/jni</code>
-</pre>
-<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>mv Greeting.c Greeting/native/src/main/c/jni</code>
-</pre>
-<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>mkdir -p Greeting/jni/src/main/java</code>
-</pre>
-<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>mv Greeting.java Greeting/jni/src/main/java</code>
 </pre>
 
@@ -218,11 +210,7 @@ JNIEXPORT void JNICALL Java_Greeting_greeting(JNIEnv * jenv, jclass jcls) {
 把它们拷到一起
 <pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>cp jni/target/classes/Greeting.class ./</code>
-</pre>
-<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>cp native/target/libgreeting.so ./</code>
-</pre>
-<pre style="overflow:auto;word-wrap:inherit;white-space:pre;">
 <code>java Greeting</code>
 </pre>
 
