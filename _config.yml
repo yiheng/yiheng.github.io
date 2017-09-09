@@ -13,7 +13,7 @@ tagline:          ''
 description:      '多实践，多思考。思考的最好方式是写作。'
 name:             '以恒'
 url:              http://yiheng.github.io
-baseurl:          /
+baseurl:          http://yiheng.github.io/
 
 author:
   name:           'Ian Wong'
